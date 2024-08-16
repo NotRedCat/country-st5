@@ -1,5 +1,6 @@
 package guru.qa.country.data;
 
+import guru.qa.country.model.Country;
 import jakarta.persistence.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -66,5 +67,13 @@ public class CountryEntity {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    public static CountryEntity fromJson(Country country) {
+        CountryEntity countryEntity = new CountryEntity();
+        countryEntity.setName(country.name());
+        countryEntity.setCode(country.code());
+        countryEntity.setDateOfIndependent(country.dateOfIndependent());
+        return countryEntity;
     }
 }
